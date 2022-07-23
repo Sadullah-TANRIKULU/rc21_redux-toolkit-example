@@ -8,21 +8,22 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { setUser } from '../features/authSlice';
+import { useDispatch } from "react-redux";
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email && password) {
-      
-      navigate('/');
-    } else {
-      alert('Please, enter a valid email/password!')
-    }
+    // TODO email, password => user state
+    dispatch(setUser({email, password}));
+    setEmail('');
+    setPassword('');
+    navigate('/');
   };
 
   return (
